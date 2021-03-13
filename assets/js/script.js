@@ -8,7 +8,7 @@ function generatePassword() {
   var numbers = '0123456789';
   var symbols = '!@#$%^&*';
   var promptLength = prompt("How many characters should your password be? Please enter a number between 8 and 128.");
-  if (promptLength < 8 || promptLength > 128) {
+  if (promptLength < 8 || promptLength > 128 || isNaN(promptLength)) {
     alert("You must enter a number between 8 and 128. Please try again.");
     generatePassword();
   } 
@@ -24,7 +24,8 @@ function generatePassword() {
   if (!confirmUppercase && !confirmLowercase && !confirmNumbers && !confirmSymbols) {
     alert("You must select at least one option. Please try again.");
     generatePassword();
-  } else for (i = 0; password.length < promptLength; i++) {
+  } else
+  for (i = 0; password.length < promptLength; i++) {
     if (confirmLowercase) {
       generatedLower += lettersLower.charAt(Math.floor(Math.random() * lettersLower.length));
     }
@@ -36,17 +37,17 @@ function generatePassword() {
     }
     if (confirmSymbols) {
       generatedSymbols += symbols.charAt(Math.floor(Math.random() * symbols.length));
-    } 
-    if (password.length >= promptLength) {
-      var passwordMaxLength = password.length - promptLength;
-      function removeCharacters() {
-        password = password.substr(0, password.length - passwordMaxLength);
-      }
-      removeCharacters();
     }
     password += generatedLower + generatedUpper + generatedNumbers + generatedSymbols;
+    }
+  if (password.length >= promptLength) {
+    var passwordMaxLength = password.length - promptLength;
+    function removeCharacters() {
+      password = password.substr(0, password.length - passwordMaxLength);
+    }
+    removeCharacters();
   }
- return password;
+  return password;
 };
 
 
