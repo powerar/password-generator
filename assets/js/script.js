@@ -1,6 +1,5 @@
 // generate a password
 function generatePassword() {
-  debugger;
   //declare function variables
   var password = '';
   var lettersLower = 'abcdefghijklmnopqrstuvwxyz';
