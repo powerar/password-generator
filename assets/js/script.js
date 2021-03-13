@@ -1,22 +1,19 @@
 // generate a password
 function generatePassword() {
-  
+  debugger;
   //declare function variables
   var password = '';
   var lettersLower = 'abcdefghijklmnopqrstuvwxyz';
   var lettersUpper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   var numbers = '0123456789';
   var symbols = '!@#$%^&*';
-  var generatedLower = '';
-  var generatedUpper = '';
-  var generatedNumbers = '';
-  var generatedSymbols = '';
+
   
   //prompt the user for password length, if invalid, re-prompt
   var promptLength = prompt("How many characters should your password be? Please enter a number between 8 and 128.");
   if (promptLength < 8 || promptLength > 128 || isNaN(promptLength)) {
     alert("You must enter a number between 8 and 128. Please try again.");
-    generatePassword();
+    return generatePassword();
   } 
 
   //prompt the user for options
@@ -24,11 +21,14 @@ function generatePassword() {
   var confirmLowercase = confirm("Should your password contain lowercase letters?");
   var confirmNumbers = confirm("Should your password contain numbers?");
   var confirmSymbols = confirm("Should your password contain special characters?");
-
+  var generatedLower = '';
+  var generatedUpper = '';
+  var generatedNumbers = '';
+  var generatedSymbols = '';
   // if no prompts selected, re-prompt
   if (!confirmUppercase && !confirmLowercase && !confirmNumbers && !confirmSymbols) {
     alert("You must select at least one option. Please try again.");
-    generatePassword();
+    return generatePassword();
   } else
 
   // generate a password based on options selected
