@@ -2,7 +2,7 @@
 
 function generatePassword() {
   debugger;
-  var password = [''];
+  var password = '';
   var lettersLower = 'abcdefghijklmnopqrstuvwxyz';
   var lettersUpper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   var numbers = '0123456789';
@@ -21,7 +21,10 @@ function generatePassword() {
   var generatedUpper = '';
   var generatedNumbers = '';
   var generatedSymbols = '';
-  for (i = 0; password.length < promptLength; i++) {
+  if (!confirmUppercase && !confirmLowercase && !confirmNumbers && !confirmSymbols) {
+    alert("You must select at least one option. Please try again.");
+    generatePassword();
+  } else for (i = 0; password.length < promptLength; i++) {
     if (confirmLowercase) {
       generatedLower += lettersLower.charAt(Math.floor(Math.random() * lettersLower.length));
     }
@@ -33,9 +36,7 @@ function generatePassword() {
     }
     if (confirmSymbols) {
       generatedSymbols += symbols.charAt(Math.floor(Math.random() * symbols.length));
-    }
-    password += generatedLower + generatedNumbers + generatedSymbols + generatedUpper;
-    }
+    } 
     if (password.length >= promptLength) {
       var passwordMaxLength = password.length - promptLength;
       function removeCharacters() {
@@ -43,9 +44,10 @@ function generatePassword() {
       }
       removeCharacters();
     }
-  return password;
+    password += generatedLower + generatedUpper + generatedNumbers + generatedSymbols;
+  }
+ return password;
 };
-
 
 
 // Get references to the #generate element
