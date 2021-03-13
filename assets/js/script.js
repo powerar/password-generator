@@ -1,30 +1,37 @@
-// Assignment code here
-
+// generate a password
 function generatePassword() {
-  debugger;
+  
+  //declare function variables
   var password = '';
   var lettersLower = 'abcdefghijklmnopqrstuvwxyz';
   var lettersUpper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   var numbers = '0123456789';
   var symbols = '!@#$%^&*';
+  var generatedLower = '';
+  var generatedUpper = '';
+  var generatedNumbers = '';
+  var generatedSymbols = '';
+  
+  //prompt the user for password length, if invalid, re-prompt
   var promptLength = prompt("How many characters should your password be? Please enter a number between 8 and 128.");
   if (promptLength < 8 || promptLength > 128 || isNaN(promptLength)) {
     alert("You must enter a number between 8 and 128. Please try again.");
     generatePassword();
   } 
 
+  //prompt the user for options
   var confirmUppercase = confirm("Should your password contain uppercase letters?");
   var confirmLowercase = confirm("Should your password contain lowercase letters?");
   var confirmNumbers = confirm("Should your password contain numbers?");
   var confirmSymbols = confirm("Should your password contain special characters?");
-  var generatedLower = '';
-  var generatedUpper = '';
-  var generatedNumbers = '';
-  var generatedSymbols = '';
+
+  // if no prompts selected, re-prompt
   if (!confirmUppercase && !confirmLowercase && !confirmNumbers && !confirmSymbols) {
     alert("You must select at least one option. Please try again.");
     generatePassword();
   } else
+
+  // generate a password based on options selected
   for (i = 0; password.length < promptLength; i++) {
     if (confirmLowercase) {
       generatedLower += lettersLower.charAt(Math.floor(Math.random() * lettersLower.length));
@@ -40,6 +47,8 @@ function generatePassword() {
     }
     password += generatedLower + generatedUpper + generatedNumbers + generatedSymbols;
     }
+
+  // if the password is too long, remove the extra characters
   if (password.length >= promptLength) {
     var passwordMaxLength = password.length - promptLength;
     function removeCharacters() {
@@ -49,7 +58,6 @@ function generatePassword() {
   }
   return password;
 };
-
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
